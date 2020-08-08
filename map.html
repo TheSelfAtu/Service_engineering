@@ -1,0 +1,38 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <div id="mapid" style="width:100%;height:500px"></div>
+  <script>
+    var mymap = L.map('mapid').setView([35.158, 136.924], 13);
+
+    L.tileLayer(
+      'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    ).addTo(mymap);
+
+    var marker_station = L.marker([35.170915, 136.881537]).addTo(mymap);
+    var marker_cassle = L.marker([35.18475, 136.899688]).addTo(mymap);
+    var circle_school = L.circle([35.158, 136.924], 200, {
+      color: 'blue',
+      fillColor: '#00f',
+      fillOpacity: 0.5
+    }).addTo(mymap);
+    circle_school.bindPopup("<b>Nagoya Institute of Technology</b><br>").openPopup();
+    var polygon = L.polygon([
+      [35.170915, 136.881537],
+      [35.18475, 136.899688],
+      [35.158, 136.924]
+    ]).addTo(mymap);
+
+    function onMapClick(e) {
+      alert("You clicked the map at " + e.latlng);
+    }
+    mymap.on('click', onMapClick);
+  </script>
+</body>
+
+</html>
